@@ -74,7 +74,7 @@ static void UpdateStateMachine(void* data)
 	eCarEvents event = *(uint16_t*) data;
 
 	char buffer[32];
-	sprintf(buffer, "NEW EVENT: %d", event);
+	sprintf(buffer, "E%d", event);
 	Log(buffer);
 
 	/* Events that have an effect on multiple states */
@@ -117,7 +117,7 @@ static void UpdateStateMachine(void* data)
 	// update state
 	state = new_state;
 
-	sprintf(buffer, "NEW STATE: %d", state);
+	sprintf(buffer, "S%d", state);
 	Log(buffer);
 }
 
