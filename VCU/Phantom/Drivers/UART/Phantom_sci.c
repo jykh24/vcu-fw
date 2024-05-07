@@ -27,10 +27,11 @@ enum eCommands{
 	ECHO_BSE='4',
 	STAT_RUN='5',  // vTaskGetRunTimeStats
 	STAT_START='6',  // xTaskGetTickCount
-	TASK_LIST='7', // vTaskList
+	TASK_LIST='7',// vTaskList
 	RESET_CAR='r',
 	START_ENGINE='s',
-	TURN_TRACTIVE_ON='o',
+	TURN_TRACTIVE_ON='n',
+	TURN_TRACTIVE_OFF='f'
 };
 
 static volatile uint8_t messageCounter = 0;
@@ -225,6 +226,12 @@ void sciReceiveCallback(sciBASE_t *sci, uint32 flags, uint8 data)
 		case RESET_CAR:
 		{
 			NotifyStateMachineFromISR(EVENT_RESET_CAR);
+
+			break;
+		}
+		case TURN_TRACTIVE_OFF:
+		{
+			NotifyStateMachine(EVENT_TRACTIVE_OFF);
 
 			break;
 		}
