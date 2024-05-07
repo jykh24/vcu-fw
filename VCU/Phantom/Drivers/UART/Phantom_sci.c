@@ -237,7 +237,7 @@ void sciReceiveCallback(sciBASE_t *sci, uint32 flags, uint8 data)
 		}
 		default:
 		{
-			LogFromISR(UWHT, "Unknown: ");
+			LogFromISR(UWHT, "");
 
 			break;
 		}

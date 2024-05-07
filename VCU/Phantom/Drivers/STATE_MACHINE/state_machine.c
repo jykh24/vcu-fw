@@ -126,7 +126,7 @@ static void UpdateStateMachine(void* data)
 
 static State VariousStates(State state, eCarEvents event)
 {
-    // severe faults can only exit from a reset event
+    // severe faults should only exit from a reset event
 	if (state != SEVERE_FAULT){
 
 	    bool faults = any(6,
