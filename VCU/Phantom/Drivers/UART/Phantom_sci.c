@@ -231,7 +231,7 @@ void sciReceiveCallback(sciBASE_t *sci, uint32 flags, uint8 data)
 		}
 		case TURN_TRACTIVE_OFF:
 		{
-			NotifyStateMachine(EVENT_TRACTIVE_OFF);
+			NotifyStateMachineFromISR(EVENT_TRACTIVE_OFF);
 
 			break;
 		}
