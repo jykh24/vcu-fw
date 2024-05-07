@@ -126,24 +126,37 @@ static void UpdateStateMachine(void* data)
 
 static State VariousStates(State state, eCarEvents event)
 {
-	bool faults = any(6, 
-		event == EVENT_APPS1_RANGE_FAULT,
-		event == EVENT_APPS2_RANGE_FAULT, 
-		event == EVENT_BRAKE_PLAUSIBILITY_FAULT,
-		event == EVENT_BSE_RANGE_FAULT,
-		event == EVENT_FP_DIFF_FAULT,
-		event == EVENT_UNRESPONSIVE_APPS
-	);
+    // severe faults can only exit from a reset event
+	if (state != SEVERE_FAULT){
 
-	if (faults && state != SEVERE_FAULT)
-	{
-		SuspendThrottle(system_tasks.Throttle);
-		
-		LogColor(RED, "Moving to SevereFault state");
+	    bool faults = any(6,
+	            event == EVENT_APPS1_RANGE_FAULT,
+	            event == EVENT_APPS2_RANGE_FAULT,
+	            event == EVENT_BRAKE_PLAUSIBILITY_FAULT,
+	            event == EVENT_BSE_RANGE_FAULT,
+	            event == EVENT_FP_DIFF_FAULT,
+	            event == EVENT_UNRESPONSIVE_APPS
+        );
 
-		FlushLogger(20); // highly likely a lot of events happened. No rush since we've already done everything. Let's log
+		if (faults)
+		{
+			SuspendThrottle(system_tasks.Throttle);
+			
+			LogColor(RED, "Moving to SevereFault state");
 
-		return SEVERE_FAULT;
+			FlushLogger(20); // highly likely a lot of events happened. No rush since we've already done everything. Let's log
+
+			return SEVERE_FAULT;
+		}
+
+        if(event == EVENT_TRACTIVE_OFF)
+        {
+            SuspendThrottle(system_tasks.Throttle);
+
+            LogColor(YEL, "Moving to TractiveOff state");
+
+            return TRACTIVE_OFF;
+        }
 	}
 
 	return state;
