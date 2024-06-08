@@ -22,7 +22,6 @@ static State TractiveOn(eCarEvents event);
 static State Running(eCarEvents event);
 static State SevereFault(eCarEvents event);
 
-
 static SystemTasks_t system_tasks;
 
 
@@ -126,13 +125,14 @@ static void UpdateStateMachine(void* data)
 
 static State VariousStates(State state, eCarEvents event)
 {
-	bool faults = any(6, 
+	bool faults = any(7, 
 		event == EVENT_APPS1_RANGE_FAULT,
 		event == EVENT_APPS2_RANGE_FAULT, 
 		event == EVENT_BRAKE_PLAUSIBILITY_FAULT,
 		event == EVENT_BSE_RANGE_FAULT,
 		event == EVENT_FP_DIFF_FAULT,
-		event == EVENT_UNRESPONSIVE_APPS
+		event == EVENT_UNRESPONSIVE_APPS,
+		event == EVENT_BRAKE_OT_FAULT, // BOTS signal recieved must open shutdown circuit
 	);
 
 	if (faults && state != SEVERE_FAULT)
@@ -195,3 +195,4 @@ static State SevereFault(eCarEvents event)
 
 	return SEVERE_FAULT;
 }
+
