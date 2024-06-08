@@ -35,6 +35,9 @@ typedef enum eCarEvents{
     EVENT_BRAKE_PLAUSIBILITY_CLEARED,
     EVENT_BRAKE_PLAUSIBILITY_FAULT,
     EVENT_UNRESPONSIVE_APPS,
+    EVENT_BRAKE_OT_FAULT, // Brake over travel fault
+    EVENT_BRAKE_OT_CLEARED, 
+
 
     END_OF_EVENTS
 } eCarEvents;
