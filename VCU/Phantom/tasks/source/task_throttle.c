@@ -63,7 +63,6 @@ static float CalculatePedalPercent(uint32_t pedalValue, float minValue, float ma
 static bool UpdatePedalRangeFaultTimer(uint32_t pedalValue, uint32_t minValue, uint32_t maxValue, TimerHandle_t faultTimer);
 static bool UpdateAPPS10PercentFaultTimer(float Percent_APPS1_Pressed, float Percent_APPS2_Pressed);
 static void CheckBrakePlausibility(uint32_t BSE_sensor_sum, float Percent_APPS1_Pressed, float Percent_APPS2_Pressed);
-//create function for clearing BOTS signal
 
 /* Public API*/
 
@@ -157,7 +156,6 @@ static void CheckFaultConditions(const pedal_reading_t* pedalReadings, float app
     // check if brakes are pressed and accelerator pedal is pressed greater than or equal to 25%
     CheckBrakePlausibility(pedalReadings->bse, apps1_percent, apps2_percent);
 
-    // check if BOTS mechanical single pole, single throw switch signal is recieved to clear BOTS Fault
 
 }
 
@@ -228,4 +226,4 @@ static void CheckBrakePlausibility(uint32_t BSE_sensor_sum, float Percent_APPS1_
     }
 }
 
-// add new function to specify clearing conditions of BOTS signal
+

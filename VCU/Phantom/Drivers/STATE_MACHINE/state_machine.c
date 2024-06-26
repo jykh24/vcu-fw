@@ -132,7 +132,7 @@ static State VariousStates(State state, eCarEvents event)
 		event == EVENT_BSE_RANGE_FAULT,
 		event == EVENT_FP_DIFF_FAULT,
 		event == EVENT_UNRESPONSIVE_APPS,
-		event == EVENT_BRAKE_OT_FAULT, // BOTS signal recieved must open shutdown circuit
+		event == EVENT_BOTS_FAULT, // BOTS signal recieved must open shutdown circuit
 	);
 
 	if (faults && state != SEVERE_FAULT)
